@@ -7,7 +7,7 @@ import sys
 # The first two arguments are the source file and the new db filename. These
 # are mandatory.
 if len(sys.argv) < 3:
-    print("Usage:\n  tosqlite.py <input> <dbname> [<table>] [<col>...]")
+    print("Usage:\n  tosqlite.py <input> <dbname> [<table> [<col>...]]")
     sys.exit(1)
 
 # The third argument is the table name, or just "table" if it's not provided.
