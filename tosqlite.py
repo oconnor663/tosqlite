@@ -23,14 +23,14 @@ input_file = open(sys.argv[1])
 reader = csv.reader(input_file, delimiter=",")
 conn = sqlite3.connect(sys.argv[2])
 
-create_statement = "CREATE TABLE %s (%s)" % (
-    TABLE_NAME,
-    ", ".join("%s" % col for col in COLUMNS))
+create_statement = "CREATE TABLE %s (%s)" % (TABLE_NAME, ", ".join(
+    "%s" % col for col in COLUMNS))
 conn.execute(create_statement)
 print("Created table", TABLE_NAME, "with columns:", ", ".join(COLUMNS))
 
 # Create an index on the first column.
-add_index_statement = "CREATE INDEX %s ON %s (%s)" % (TABLE_NAME + "_index", TABLE_NAME, COLUMNS[0])
+add_index_statement = "CREATE INDEX %s ON %s (%s)" % (TABLE_NAME + "_index",
+                                                      TABLE_NAME, COLUMNS[0])
 conn.execute(add_index_statement)
 print("Added an index on", COLUMNS[0])
 
@@ -40,7 +40,7 @@ for row in reader:
 
     # Add more columns if needed.
     for i in range(len(COLUMNS), len(row)):
-        new_col = "col" + str(i+1)
+        new_col = "col" + str(i + 1)
         COLUMNS.append(new_col)
         add_column_statement = "ALTER TABLE %s ADD %s" % (TABLE_NAME, new_col)
         conn.execute(add_column_statement)
@@ -51,9 +51,7 @@ for row in reader:
 
     # Insert the row.
     insert_statement = "INSERT INTO %s (%s) VALUES (%s)" % (
-        TABLE_NAME,
-        ", ".join(COLUMNS),
-        ", ".join(["?"] * len(COLUMNS)))
+        TABLE_NAME, ", ".join(COLUMNS), ", ".join(["?"] * len(COLUMNS)))
     conn.execute(insert_statement, row)
 
 print("Inserted", count, "rows.")
