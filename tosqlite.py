@@ -11,7 +11,7 @@ if len(sys.argv) < 3:
     sys.exit(1)
 
 # The third argument is the table name, or just "table" if it's not provided.
-TABLE_NAME = "default"
+TABLE_NAME = "table1"
 if len(sys.argv) >= 4:
     TABLE_NAME = sys.argv[3]
 
