@@ -56,6 +56,9 @@ for row in reader:
 
 print("Inserted", count, "rows.")
 
+# Analyzing is important for the query planner if indices are added.
+conn.execute("ANALYZE")
+
 input_file.close()
 conn.commit()
 conn.close()
